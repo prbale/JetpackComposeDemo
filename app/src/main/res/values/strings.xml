@@ -5,4 +5,6 @@
     <string name="password_label">Password</string>
     <string name="password_placeholder">Enter your password here</string>
     <string name="login_title">Welcome to Compose Demo</string>
+    <string name="forgot_password_link">Forgot Password ?</string>
+    <string name="sign_in_button">Sign In</string>
 </resources>
