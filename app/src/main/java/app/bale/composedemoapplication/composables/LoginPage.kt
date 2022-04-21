@@ -36,7 +36,6 @@ fun LoginPage() {
     val emailValue = remember { mutableStateOf("") }
     val passwordValue = remember { mutableStateOf("") }
 
-    // ----------------- Display Image ---------------
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
@@ -50,8 +49,6 @@ fun LoginPage() {
 
         }
     }
-
-    // ----------------- Display Inputs ---------------
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
