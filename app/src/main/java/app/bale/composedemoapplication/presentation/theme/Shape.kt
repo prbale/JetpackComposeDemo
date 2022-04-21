@@ -1,4 +1,4 @@
-package app.bale.composedemoapplication.ui.theme
+package app.bale.composedemoapplication.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

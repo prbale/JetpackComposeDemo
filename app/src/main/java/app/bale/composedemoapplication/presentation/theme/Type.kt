@@ -1,4 +1,4 @@
-package app.bale.composedemoapplication.ui.theme
+package app.bale.composedemoapplication.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

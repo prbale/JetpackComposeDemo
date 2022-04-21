@@ -1,4 +1,4 @@
-package app.bale.composedemoapplication.composables
+package app.bale.composedemoapplication.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,24 +18,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.bale.composedemoapplication.R
-import app.bale.composedemoapplication.ui.theme.ComposeDemoApplicationTheme
-import app.bale.composedemoapplication.ui.theme.TextFieldTextColor
-import app.bale.composedemoapplication.ui.theme.whiteBackground
-
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DefaultPreview() {
-    ComposeDemoApplicationTheme {
-        LoginPage()
-    }
-}
+import app.bale.composedemoapplication.presentation.theme.TextFieldTextColor
+import app.bale.composedemoapplication.presentation.theme.whiteBackground
 
 @Composable
-fun LoginPage() {
+fun LoginPage(loginViewModel: LoginViewModel) {
 
     val emailValue = remember { mutableStateOf("") }
     val passwordValue = remember { mutableStateOf("") }
@@ -75,7 +65,12 @@ fun LoginPage() {
                 state = passwordValue
             )
 
-            SignIn()
+            SignIn {
+                // Login with credentials
+                loginViewModel.doLogin(emailValue.value, passwordValue.value)
+                val result = loginViewModel.result.value
+                println(if(result.username.isEmpty()) "Login Result: Invalid Credentials" else "Login Result: Welcome ${result.username} !!")
+            }
 
             ForgotPasswordText()
         }
@@ -101,18 +96,12 @@ fun InputField(label: String, placeholder: String, state: MutableState<String>) 
     )
 }
 
-// You can have as many preview functions as you want.
-@Preview
 @Composable
-fun SignInButtonPreview() = SignIn()
+fun SignIn(onClickAction: () -> Unit) {
 
-@Composable
-fun SignIn(){
     Button(
-        onClick = {},
-        modifier = Modifier
-            .padding(top = 25.dp)
-            .requiredWidth(277.dp)
+        onClick = { onClickAction.invoke() },
+        modifier = Modifier.padding(top = 25.dp).requiredWidth(277.dp)
     ) {
         Text(text = stringResource(R.string.sign_in_button))
     }
