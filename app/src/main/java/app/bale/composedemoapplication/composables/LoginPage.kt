@@ -1,5 +1,9 @@
 package app.bale.composedemoapplication.composables
 
+import android.content.res.Resources
+import android.graphics.BitmapFactory
+import android.media.Image
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,12 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.bale.composedemoapplication.ui.theme.ComposeDemoApplicationTheme
 import app.bale.composedemoapplication.ui.theme.TextFieldTextColor
 import app.bale.composedemoapplication.ui.theme.whiteBackground
+import app.bale.composedemoapplication.R
 
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
@@ -36,20 +44,6 @@ fun LoginPage() {
     val emailValue = remember { mutableStateOf("") }
     val passwordValue = remember { mutableStateOf("") }
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White),
-            contentAlignment = Alignment.TopCenter
-        ) {
-
-        }
-    }
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -60,23 +54,28 @@ fun LoginPage() {
             .background(whiteBackground)
             .padding(10.dp)
     ) {
+
+        PurposeImage()
+
         Text(
-            text = "Login",
-            fontSize = 38.sp
+            text = stringResource(R.string.login_title),
+            fontSize = 38.sp,
+            textAlign = TextAlign.Center
         )
+
         Spacer(modifier = Modifier.padding(20.dp))
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
             InputField(
-                label = "Email Address",
-                placeholder = "Enter Email Address here",
+                label = stringResource(R.string.email_address),
+                placeholder = stringResource(R.string.email_placeholder),
                 state = emailValue
             )
 
             InputField(
-                label = "Password",
-                placeholder = "Enter your password here",
+                label = stringResource(R.string.password_label),
+                placeholder = stringResource(R.string.password_placeholder),
                 state = passwordValue
             )
 
@@ -86,6 +85,12 @@ fun LoginPage() {
         }
         
     }
+}
+
+@Composable
+fun PurposeImage(){
+    Image(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "LocationPin",
+        modifier = Modifier.size(100.dp))
 }
 
 @Composable
@@ -107,15 +112,21 @@ fun SignInButtonPreview() = SignIn()
 
 @Composable
 fun SignIn(){
-    Button(onClick = {},modifier = Modifier
-        .padding(top = 25.dp)
-        .requiredWidth(277.dp)){
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .padding(top = 25.dp)
+            .requiredWidth(277.dp)
+    ) {
         Text(text = "Sign In")
     }
 }
 
 @Composable
 fun ForgotPasswordText(){
-    Text(text = "Forgot Password ?",color = MaterialTheme.colors.TextFieldTextColor,
-        modifier = Modifier.padding(top = 70.dp))
+    Text(
+        text = "Forgot Password ?",
+        color = MaterialTheme.colors.TextFieldTextColor,
+        modifier = Modifier.padding(top = 70.dp)
+    )
 }

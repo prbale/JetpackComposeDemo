@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ComposeDemoApplication</string>
+    <string name="email_address">Email Address</string>
+    <string name="email_placeholder">Enter Email Address here</string>
+    <string name="password_label">Password</string>
+    <string name="password_placeholder">Enter your password here</string>
+    <string name="login_title">Welcome to Compose Demo</string>
 </resources>
