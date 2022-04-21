@@ -1,4 +1,4 @@
-package app.bale.composedemoapplication.ui.login
+package app.bale.composedemoapplication.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import app.bale.composedemoapplication.presentation.theme.ComposeDemoApplicationTheme
-import app.bale.composedemoapplication.ui.login.LoginPage
-import app.bale.composedemoapplication.ui.login.LoginViewModel
+import app.bale.composedemoapplication.presentation.login.LoginPage
+import app.bale.composedemoapplication.presentation.login.LoginViewModel
 
 class MainActivity : ComponentActivity() {
 

@@ -1,4 +1,4 @@
-package app.bale.composedemoapplication.ui.login
+package app.bale.composedemoapplication.presentation.login
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
