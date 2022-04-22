@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,7 +64,8 @@ fun LoginPage(loginViewModel: LoginViewModel) {
             InputField(
                 label = stringResource(R.string.password_label),
                 placeholder = stringResource(R.string.password_placeholder),
-                state = passwordValue
+                state = passwordValue,
+                visualTransformation = PasswordVisualTransformation()
             )
 
             SignIn {
@@ -89,11 +92,17 @@ fun PurposeImage(){
 }
 
 @Composable
-fun InputField(label: String, placeholder: String, state: MutableState<String>) {
+fun InputField(
+    label: String,
+    placeholder: String,
+    state: MutableState<String>,
+    visualTransformation: VisualTransformation = VisualTransformation.None ) {
+
     OutlinedTextField(
         value = state.value,
         onValueChange = { state.value = it },
         label = { Text(text = label) },
+        visualTransformation = visualTransformation,
         placeholder = { Text(text = placeholder)},
         singleLine = true,
         modifier = Modifier.fillMaxWidth(8.8f)
