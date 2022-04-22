@@ -1,5 +1,6 @@
 package app.bale.composedemoapplication.presentation.login
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,9 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -29,8 +32,11 @@ import app.bale.composedemoapplication.presentation.theme.whiteBackground
 @Composable
 fun LoginPage(loginViewModel: ILoginViewModel) {
 
-    val emailValue = remember { mutableStateOf("") }
-    val passwordValue = remember { mutableStateOf("") }
+    val context = LocalContext.current
+
+    // rememberSaveable helps to save the state even after configuration changes.
+    val emailValue = rememberSaveable { mutableStateOf("") }
+    val passwordValue = rememberSaveable { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -76,7 +82,12 @@ fun LoginPage(loginViewModel: ILoginViewModel) {
                 val result = loginViewModel.result.value
 
                 // Print it !
-                println(if(result.username.isEmpty()) "Login Result: Invalid Credentials" else "Login Result: Welcome ${result.username} !!")
+                Toast.makeText(
+                    context,
+                    if(result.username.isEmpty()) "Login Result: Invalid Credentials" else "Login Result: Welcome ${result.username} !!",
+                    Toast.LENGTH_LONG
+                ).show()
+
             }
 
             ForgotPasswordText()
@@ -117,7 +128,9 @@ fun SignIn(isEnabled: Boolean, onClickAction: () -> Unit) {
     Button(
         onClick = { onClickAction.invoke() },
         enabled = isEnabled,
-        modifier = Modifier.padding(top = 25.dp).requiredWidth(277.dp)
+        modifier = Modifier
+            .padding(top = 25.dp)
+            .requiredWidth(277.dp)
     ) {
         Text(text = stringResource(R.string.sign_in_button))
     }
