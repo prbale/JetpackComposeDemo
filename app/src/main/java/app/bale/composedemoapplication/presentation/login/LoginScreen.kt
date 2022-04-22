@@ -72,13 +72,15 @@ fun LoginPage(loginViewModel: ILoginViewModel) {
             InputField(
                 label = stringResource(R.string.email_address),
                 placeholder = stringResource(R.string.email_placeholder),
-                state = emailValue
+                state = emailValue,
+                image = R.drawable.ic_email
             )
 
             InputField(
                 label = stringResource(R.string.password_label),
                 placeholder = stringResource(R.string.password_placeholder),
                 state = passwordValue,
+                image = R.drawable.ic_lock,
                 visualTransformation = PasswordVisualTransformation()
             )
 
@@ -118,6 +120,7 @@ fun InputField(
     label: String,
     placeholder: String,
     state: MutableState<String>,
+    image: Int,
     visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
 
@@ -128,6 +131,7 @@ fun InputField(
         visualTransformation = visualTransformation,
         placeholder = { Text(text = placeholder) },
         singleLine = true,
+        leadingIcon = {Image(painter = painterResource(id = image), contentDescription = "")},
         modifier = Modifier.fillMaxWidth(8.8f)
     )
 }
