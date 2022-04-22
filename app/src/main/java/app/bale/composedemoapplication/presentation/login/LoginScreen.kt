@@ -66,9 +66,13 @@ fun LoginPage(loginViewModel: LoginViewModel) {
             )
 
             SignIn {
-                // Login with credentials
+                // Do login
                 loginViewModel.doLogin(emailValue.value, passwordValue.value)
+
+                // Check Result
                 val result = loginViewModel.result.value
+
+                // Print it !
                 println(if(result.username.isEmpty()) "Login Result: Invalid Credentials" else "Login Result: Welcome ${result.username} !!")
             }
 
