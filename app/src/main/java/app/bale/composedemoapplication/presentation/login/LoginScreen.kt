@@ -12,7 +12,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,11 +22,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.bale.composedemoapplication.R
 import app.bale.composedemoapplication.presentation.theme.TextFieldTextColor
 import app.bale.composedemoapplication.presentation.theme.whiteBackground
+
+// Android Studio provides an awesome feature of previewing your Compose UI
+// elements while writing the code.
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun DefaultPreview() {
+    LoginPage(loginViewModel = LoginViewModel.composeViewModel)
+}
 
 @Composable
 fun LoginPage(loginViewModel: ILoginViewModel) {
@@ -84,7 +92,7 @@ fun LoginPage(loginViewModel: ILoginViewModel) {
                 // Print it !
                 Toast.makeText(
                     context,
-                    if(result.username.isEmpty()) "Login Result: Invalid Credentials" else "Login Result: Welcome ${result.username} !!",
+                    if (result.username.isEmpty()) "Login Result: Invalid Credentials" else "Login Result: Welcome ${result.username} !!",
                     Toast.LENGTH_LONG
                 ).show()
 
@@ -92,16 +100,17 @@ fun LoginPage(loginViewModel: ILoginViewModel) {
 
             ForgotPasswordText()
         }
-        
+
     }
 }
 
 @Composable
-fun PurposeImage(){
+fun PurposeImage() {
     Image(
-        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        painter = painterResource(id = R.drawable.logo),
         contentDescription = "Application Icon",
-        modifier = Modifier.size(100.dp))
+        modifier = Modifier.size(150.dp)
+    )
 }
 
 @Composable
@@ -109,14 +118,15 @@ fun InputField(
     label: String,
     placeholder: String,
     state: MutableState<String>,
-    visualTransformation: VisualTransformation = VisualTransformation.None ) {
+    visualTransformation: VisualTransformation = VisualTransformation.None
+) {
 
     OutlinedTextField(
         value = state.value,
         onValueChange = { state.value = it },
         label = { Text(text = label) },
         visualTransformation = visualTransformation,
-        placeholder = { Text(text = placeholder)},
+        placeholder = { Text(text = placeholder) },
         singleLine = true,
         modifier = Modifier.fillMaxWidth(8.8f)
     )
@@ -137,7 +147,7 @@ fun SignIn(isEnabled: Boolean, onClickAction: () -> Unit) {
 }
 
 @Composable
-fun ForgotPasswordText(){
+fun ForgotPasswordText() {
     Text(
         text = stringResource(R.string.forgot_password_link),
         color = MaterialTheme.colors.TextFieldTextColor,
