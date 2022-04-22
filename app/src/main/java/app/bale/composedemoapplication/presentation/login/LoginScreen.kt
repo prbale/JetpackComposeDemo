@@ -27,7 +27,7 @@ import app.bale.composedemoapplication.presentation.theme.TextFieldTextColor
 import app.bale.composedemoapplication.presentation.theme.whiteBackground
 
 @Composable
-fun LoginPage(loginViewModel: LoginViewModel) {
+fun LoginPage(loginViewModel: ILoginViewModel) {
 
     val emailValue = remember { mutableStateOf("") }
     val passwordValue = remember { mutableStateOf("") }
@@ -68,7 +68,7 @@ fun LoginPage(loginViewModel: LoginViewModel) {
                 visualTransformation = PasswordVisualTransformation()
             )
 
-            SignIn {
+            SignIn(isEnabled = true) {
                 // Do login
                 loginViewModel.doLogin(emailValue.value, passwordValue.value)
 
@@ -87,7 +87,9 @@ fun LoginPage(loginViewModel: LoginViewModel) {
 
 @Composable
 fun PurposeImage(){
-    Image(painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = "LocationPin",
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        contentDescription = "Application Icon",
         modifier = Modifier.size(100.dp))
 }
 
@@ -110,10 +112,11 @@ fun InputField(
 }
 
 @Composable
-fun SignIn(onClickAction: () -> Unit) {
+fun SignIn(isEnabled: Boolean, onClickAction: () -> Unit) {
 
     Button(
         onClick = { onClickAction.invoke() },
+        enabled = isEnabled,
         modifier = Modifier.padding(top = 25.dp).requiredWidth(277.dp)
     ) {
         Text(text = stringResource(R.string.sign_in_button))

@@ -7,11 +7,11 @@ import androidx.lifecycle.viewModelScope
 import app.bale.composedemoapplication.domain.model.LoginResponse
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : ViewModel(), ILoginViewModel {
 
-    val result: MutableState<LoginResponse> = mutableStateOf(LoginResponse(0, ""))
+    override val result: MutableState<LoginResponse> = mutableStateOf(LoginResponse(0, ""))
 
-    fun doLogin(email: String, password: String) {
+    override fun doLogin(email: String, password: String) {
 
         viewModelScope.launch {
 
@@ -21,5 +21,17 @@ class LoginViewModel : ViewModel() {
                 LoginResponse(400, "")
 
         }
+    }
+
+    // Need to have this companion object when we need to pass viewmodel instance in
+    // composable preview function.
+    companion object {
+        val composeViewModel =
+            object : ILoginViewModel {
+                override val result: MutableState<LoginResponse>
+                    get() = mutableStateOf(LoginResponse(0, ""))
+
+                override fun doLogin(email: String, password: String) {}
+            }
     }
 }
